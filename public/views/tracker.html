@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <table class="table" style="margin:10px; text-align: center;">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Total tasks</th>
+                <th>Completed tasks</th>
+            </tr>
+            <tr ng-repeat="user in users">
+                <td>{{user.email_id}}</td>
+                <td>{{user.total_tasks}}</td>
+                <td>{{user.completed_tasks}}</td>
+            </tr>
+        </thead>
+    </table>
+</div>

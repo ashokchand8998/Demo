@@ -1,0 +1,46 @@
+<nav>
+    <ul class="nav nav-tabs" ng-init="page = 'dfdfdf'">
+        <li class="nav-item"><a class="nav-link" href="/#!addtasks">
+        Add Task</a></li>
+        <li class="nav-item"><a class="nav-link  active" href="/#!viewtasks">View tasks</a></li>
+    </ul>
+</nav>
+<div class="container-fluid">
+    <table class="table" style="margin:10px; text-align: center;">
+        <tr>
+            <form name="updateform" role="form">
+                <td>
+                    <input type="text" name="task" class="form-control" id="title" ng-model="selected.title" required>
+                </td>
+                <td>
+                    <input type="date" class="form-control" id="last_date" min="{{curr_date | date: 'yyyy-MM-dd'}}" ng-model="selected.last_date" required>
+                </td>
+                <td>
+                    <input type="checkbox" class="form-control" id="status" {{selected.checked_or_not}} ng-model="selected.completed">
+                </td>
+                <td>
+                    <button class="btn btn-secondary" ng-disabled="data_absent" ng-click="update()">Update</button>
+                </td>
+            </form>
+        </tr>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="task in tasks">
+                <td>{{task.title}}</td>
+                <td>{{task.last_date | date}}</td>
+                <td>{{task.completed ? 'Completed' : 'Incomplete'}}</td>
+                <td>
+                    <button class="btn btn-primary" ng-click="edit(task)">Edit</button>
+                    <button class="btn btn-danger" ng-click="delete(task)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

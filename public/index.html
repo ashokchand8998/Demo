@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test App Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    </head>
+    <body ng-app="mainApp" ng-controller="mainCtrl">
+        <header class="container-fluid">
+            <h1 style="font-size:45px;font-family: Times New Roman; text-align: center;padding-top: 5px;"><b>Productivity Tracker</b></h1>
+            <nav style="display: grid; grid-template-columns: auto auto;">
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" href="/#!viewtasks">
+                        Tasks</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/#!tracker">Tracker</a></li>
+                    </ul> 
+                </div>
+                <div style="text-align: right;">
+                    <button class="btn btn-danger btn-m" ng-click="logout()">Logout</button>
+                </div>
+            </nav>
+        </header>
+        <div ng-view>
+        </div>
+        <footer></footer>
+        <script src="./script.js"></script>
+    </body>
+</html>
