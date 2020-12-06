@@ -54,13 +54,23 @@ mainApp.config(function($routeProvider) {
         templateUrl: "./views/tracker.html",
         controller: "trackerCtrl"
     })
+    .when("/profile", {
+        resolve: {
+            check: function($location) {
+            if(!localStorage.getItem('logged')) {
+                $location.path("/")
+            }
+        }},
+        templateUrl: "./views/profile.html",
+        controller: "profileCtrl"
+    })
     .otherwise({
         template: "<h1>Page not found</h1>"
     });
 });
 
 //controller
-mainApp.controller('mainCtrl', function($scope, $route) {
+mainApp.controller('profileCtrl', function($scope, $route) {
     $scope.logout = function() {
         localStorage.clear();
         $route.reload();
@@ -104,7 +114,8 @@ mainApp.controller('signupCtrl', function($scope, $http, $location) {
 mainApp.controller('viewtasksCtrl', function($route, $scope, $http) {
     if (localStorage.getItem('logged')) {
         $scope.curr_date = new Date();
-        $scope.data_absent = true;
+        $scope.not_edit_mode = true;
+        $scope.edit_id = null;
 
         $http.get(`/api/getalltasks/${localStorage.getItem('user_id')}`).then(
             function successCallback(response) {
@@ -116,7 +127,8 @@ mainApp.controller('viewtasksCtrl', function($route, $scope, $http) {
         );
         $scope.edit = function(selectedtask) {
             $scope.selected = angular.copy(selectedtask);
-            $scope.data_absent = false;
+            $scope.edit_id = $scope.selected.id;
+            $scope.not_edit_mode = false;
             $scope.selected.last_date = new Date($scope.selected.last_date)
         };
         $scope.update = function() {

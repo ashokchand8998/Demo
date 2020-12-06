@@ -1,0 +1,99 @@
+body {
+  background-color: white;
+  margin: 0;
+}
+
+button {
+  border-radius: 5px;
+  font-size: large;
+  padding: 5px;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+header .title {
+  font-size: 45px;
+  font-family: Times New Roman;
+  text-align: center;
+  padding-top: 5px;
+  margin: 5px;
+}
+header .main-nav {
+  display: block;
+  background-color: grey;
+  padding: 0 5px;
+}
+header .nav-tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px;
+  margin: 0;
+}
+header .nav-tabs .nav-item {
+  display: inline;
+  font-size: x-large;
+  font-weight: bold;
+  font-family: cursive;
+}
+header .nav-tabs .nav-item a {
+  color: white;
+  padding: 5px;
+}
+header .nav-tabs .nav-item :active {
+  background: green;
+}
+header .nav-tabs :hover {
+  background-color: black;
+}
+header .nav-link {
+  color: black;
+  text-decoration: chartreuse;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.center .nav-tabs {
+  list-style-type: none;
+}
+.center .nav-tabs .nav-item {
+  display: inline;
+}
+.center .nav-tabs .nav-item .nav-link {
+  text-decoration: none;
+}
+.center form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+.center form div {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+input {
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid skyblue;
+  padding: 10px;
+  font-size: large;
+}
+input :focus {
+  border: 30px solid green;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table td {
+  border-top: 2px solid black;
+  padding: 2px 0;
+  margin: 0;
+}
+
+/*# sourceMappingURL=index.css.map */

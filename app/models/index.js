@@ -8,9 +8,8 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host : dbConfig.HOST,
     dialect: dbConfig.dialect,
-    //Using Sequelize without any aliases improves security
-    operatorsAliases: false,
-
+    //to prevent sequelize log out executed queries in console
+    logging:false,
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,

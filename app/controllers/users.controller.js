@@ -1,11 +1,11 @@
-const { RSA_PKCS1_PSS_PADDING } = require('constants');
 const crypto = require('crypto');
-const { cursorTo } = require('readline');
 const { sequelize } = require('../models');
 const db = require("../models");
 const User = db.users;
+
 //for using operators
 //const Op = db.sequelize.Op;
+
 //hashing password function
 const setHashedPassword = function(password, new_salt = crypto.randomBytes(16).toString('hex')) {
     let new_hash = crypto.pbkdf2Sync(password, new_salt, 1000, 64, 'sha512').toString('hex');
@@ -88,7 +88,6 @@ exports.update = (req, res) => {
             id: id
         }
     }).then(function(num) {
-        console.log("returned data: " + typeof num);
         if(num == 1) {
             res.send({
                 messsage: "User was updated successfully!"
@@ -108,7 +107,6 @@ exports.update = (req, res) => {
 
 //Tracker Report
 exports.getTrackReport = (req, res) => {
-    console.log(User)
     sequelize.query("SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id GROUP BY email_id;")
     .then(function(results, metadata) {
         res.send(results[0])
