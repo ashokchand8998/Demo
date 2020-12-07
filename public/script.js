@@ -81,12 +81,14 @@ mainApp.controller('loginCtrl', function($scope, $http, $location) {
             }
             $http.post("/api/check-user", data).then(
                 function successCallback(response) {
-                    $scope.user_exists = response.data.exists;
+                    $scope.invalid_user = !response.data.exists;
                 },
                 function errorCallback(response) {
                     alert(response);
                 }
             )
+        } else {
+            $scope.invalid_user = false;
         }
     }
 
@@ -108,7 +110,7 @@ mainApp.controller('signupCtrl', function($scope, $http, $location) {
     $scope.user = {
         email_id : null
     };
-
+    
     $scope.check_user = function() {
         const email_id = $scope.user.email_id;
         if (email_id) {
@@ -123,6 +125,8 @@ mainApp.controller('signupCtrl', function($scope, $http, $location) {
                     alert(response);
                 }
             )
+        } else {
+            $scope.user_exists = false;
         }
     }
 
@@ -176,6 +180,7 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
                 alert(response.data.message);
             }
         );
+
         $scope.edit = function(selectedtask) {
             $scope.selected = angular.copy(selectedtask);
             $scope.edit_id = $scope.selected.id;
