@@ -26,6 +26,10 @@ router.post('/api/add-user', function(req, res) {
     users.create(req, res);
 })
 
+router.post('/api/check-user', function(req, res) {
+    users.find(req, res);
+})
+
 router.post('/api/user-login', function(req, res) {
     users.authenticate(req, res);
 })

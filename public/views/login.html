@@ -5,8 +5,9 @@
     <form name="loginform" role="form">
         <div class="form-group">
             <label for="email">Email: </label>
-            <input type="email" class="text" name="email" id="email" placeholder="Enter your email-id here.." ng-model="user.email_id" required>
+            <input type="email" class="text" name="email" id="email" placeholder="Enter your email-id here.." ng-blur="check_user()" ng-model="user.email_id" required>
             <span style="color: red;" ng-show="loginform.email.$error.email">Not a valid email!!</span>
+            <span style="color: red;" ng-show="loginform.email.$dirty && !user_exists">User dosen't exists! Please try creating a new account!</span>
         </div>
         <div class="form-group">
             <label for="password">Password: </label>
@@ -15,7 +16,7 @@
         </div>
         <div class="form-group" style="text-align: center; display: flex; flex-direction: column;">
             <a href="#!signup" style="color:green" ng-click="signup()">Don't have an account?</a>
-            <button class="login-btn" ng-disabled="loginform.$invalid" ng-click="login()">Login</button>
+            <button class="login-btn" ng-disabled="loginform.$invalid || {{!user_exists}}" ng-click="login()">Login</button>
         </div>
     </form>
 </div>

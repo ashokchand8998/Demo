@@ -6,6 +6,30 @@ const User = db.users;
 //for using operators
 //const Op = db.sequelize.Op;
 
+exports.find = (req, res) => {
+    User.findOne({
+        where: {
+            email_id: req.body.email_id
+        }
+    })
+    .then( function(data) {
+        if(data) {
+            res.status(200).send({
+                exists: true
+            });
+        } else {
+            res.status(200).send({
+                exists: false
+            });
+        }
+    })
+    .catch(function(err) {
+        res.status(500).send({
+            message: "Some error occures while retrieving data"
+        });
+    })
+}
+
 //hashing password function
 const setHashedPassword = function(password, new_salt = crypto.randomBytes(16).toString('hex')) {
     let new_hash = crypto.pbkdf2Sync(password, new_salt, 1000, 64, 'sha512').toString('hex');
@@ -43,13 +67,12 @@ exports.create = (req, res) => {
     })
     .catch(function(err) {
         res.status(500).send({
-
             message: err.message === "Validation error" ? "User with same email id already exists!! Please try to login" : err.message
         });
     });
 };
 
-// Find a single User with and email_id
+// Find a single User with and email_id and then authenticate
 exports.authenticate = (req, res) => {
     User.findOne({
         where: {
@@ -119,28 +142,28 @@ exports.getTrackReport = (req, res) => {
 }
 
 //Delete a User with the specified email_id in the request
-exports.delete = (req, res) => {
-    const id = req.params.id;
+// exports.delete = (req, res) => {
+//     const id = req.params.id;
     
-    User.destroy({
-        where: {
-            id: id
-        }
-    })
-    .then(function(num) {
-        if(num === 1) {
-            res.send({
-                message: "User was deleted successfuly!"
-            });
-        } else {
-            res.send({
-                message: `Cannot update User with id=${id}. Maybe user dosen't exist!`
-            });
-        }
-    })
-    .catch(function(err) {
-        res.status(500).send({
-            message: "Could not delete the user with id=" + id
-        });
-    });
-};
+//     User.destroy({
+//         where: {
+//             id: id
+//         }
+//     })
+//     .then(function(num) {
+//         if(num === 1) {
+//             res.send({
+//                 message: "User was deleted successfuly!"
+//             });
+//         } else {
+//             res.send({
+//                 message: `Cannot update User with id=${id}. Maybe user dosen't exist!`
+//             });
+//         }
+//     })
+//     .catch(function(err) {
+//         res.status(500).send({
+//             message: "Could not delete the user with id=" + id
+//         });
+//     });
+// };
