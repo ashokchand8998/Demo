@@ -1,4 +1,4 @@
-const mainApp = angular.module("mainApp", ["ngRoute"]);
+const mainApp = angular.module("mainApp", ["ngRoute", "zingchart-angularjs"]);
 
 //services
 // mainApp.factory('SampleService', function() {
@@ -156,9 +156,9 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
 
         $scope.addnewtask = function() {
             $scope.task.user_id = localStorage.getItem('user_id');
-            $scope.task.last_date = $scope.curr_date;
+            console.log($scope.task.last_date)
             if(!$scope.task.last_date) {
-                $scope.task.last_date = date;
+                $scope.task.last_date = $scope.curr_date;;
             }
             $http.post(`/api/addnewtask/${localStorage.getItem('user_id')}`, $scope.task).then(
                 function successCallback(response) {
@@ -220,14 +220,69 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
     }
 });
 
-mainApp.controller('trackerCtrl', function($scope, $http) {
-    $http.get("/api/view-track-report").then(
-        function successCallback(response) {
-            console.log(response.data)
-            $scope.users = response.data;
-        },
-        function errorCallback(response) {
-            alert(response.message);
-        }
-    );
+mainApp.controller('trackerCtrl', function($scope, $http, $filter) {
+    curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
+    $scope.applyfilter = function(date = $filter('date')($scope.filter_date, "yyyy-MM-dd")) {
+        console.log("filter button clicked", date)
+        $http.get(`/api/view-track-report/${date}`).then(
+            function successCallback(response) {
+                let all_emails = [null];
+                let total_tasks = [null];
+                let completed_tasks = [null];
+                $scope.users = response.data;
+                console.log("users", $scope.users)
+                for(let user in $scope.users) {
+                    all_emails.push($scope.users[user]['email_id']);
+                    total_tasks.push(parseInt($scope.users[user]['total_tasks']));
+                    completed_tasks.push(parseInt($scope.users[user]['completed_tasks']));
+                }
+                all_emails.push(null);
+                total_tasks.push(null);
+                completed_tasks.push(null);
+                $scope.data = [total_tasks, completed_tasks]
+                $scope.myJson = {
+                    type: "line",
+                    title: {
+                        text: "Track Report"
+                    },
+                    "crosshair-x": {},
+                    legend:{
+                        align: "right",
+                        verticalAlign: "top",
+                        adjustLayout: true
+                    },
+                    "scale-x": {
+                        values: all_emails,
+                        label: {
+                            text: "Users"
+                        }
+                    },
+                    "scale-y": {
+                        values: `0: ${Math.max(...total_tasks) + 1}: 1`,
+                        format: "%v",
+                        label: {
+                            text: "No. of tasks"
+                        }
+                    },
+                    series: [
+                        { "line-color": "black", "line-width": 3, text: "Total tasks", marker: { size: 9 }},
+                        { "line-color": "green", "line-width": 3, text: "Completed tasks", marker: { size: 5 }}     
+                    ],
+                    plot: {
+                        "aspect": "spline",
+                        "tooltip": false,
+                        "animation": {
+                            effect: 1,
+                            sequence: 2,
+                            speed: 10
+                        }
+                    }
+                };
+            },
+            function errorCallback(response) {
+                alert(response.message);
+            }
+        );
+    };
+    $scope.applyfilter(curr_date)
 });

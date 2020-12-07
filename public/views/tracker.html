@@ -1,16 +1,9 @@
 <div class="center">
-    <table class="table" style="margin:10px; text-align: center;">
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Total tasks</th>
-                <th>Completed tasks</th>
-            </tr>
-            <tr ng-repeat="user in users">
-                <td>{{user.email_id}}</td>
-                <td>{{user.total_tasks}}</td>
-                <td>{{user.completed_tasks}}</td>
-            </tr>
-        </thead>
-    </table>
+    <div class="filter">
+        <form name="filterform"  role="form" style="display: flex; flex-direction: row; justify-content: space-between;">
+            <input class="form-control" type="date" ng-model="filter_date" required>
+            <button ng-click="applyfilter()" ng-disabled="filterform.$invalid || {{!!filter_date}}">Apply filter</button>
+    </div>
+    <div zingchart id="myChart" zc-values="data" zc-json="myJson" zc-height="500" zc-width="600">
+    </div>
 </div>

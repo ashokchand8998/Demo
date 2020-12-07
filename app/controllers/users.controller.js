@@ -130,15 +130,18 @@ exports.update = (req, res) => {
 
 //Tracker Report
 exports.getTrackReport = (req, res) => {
-    sequelize.query("SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id GROUP BY email_id;")
-    .then(function(results, metadata) {
-        res.send(results[0])
-    })
-    .catch(function(err) {
-        res.status(500).send({
-            message: err.message
+    date = req.params.date;
+    if(date) {
+        sequelize.query(`SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id WHERE last_date = '${date}' GROUP BY email_id;`)
+        .then(function(results, metadata) {
+            res.send(results[0])
         })
-    })
+        .catch(function(err) {
+            res.status(500).send({
+                message: err.message
+            })
+        })
+    }
 }
 
 //Delete a User with the specified email_id in the request

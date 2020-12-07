@@ -17,7 +17,7 @@ router.get('/api/gettask/:uid/:id', function(req, res) {
     tasks.findOne(req, res);
 })
 
-router.get('/api/view-track-report', function(req, res) {
+router.get('/api/view-track-report/:date', function(req, res) {
     users.getTrackReport(req, res);
 })
 
