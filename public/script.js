@@ -1,14 +1,16 @@
 const mainApp = angular.module("mainApp", ["ngRoute", "zingchart-angularjs"]);
 
 //services
-// mainApp.factory('SampleService', function() {
-//     return {
-//         show_button : localStorage.getItem('logged')
-//     }
-// })
+mainApp.factory('pageService', function() {
+    let obj = {}
+    obj.setPage = function(page_name) {
+        obj.page = page_name;
+    }
+    console.log("dfdf")
+    return obj;
+});
 
 //routes
-
 mainApp.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -29,7 +31,7 @@ mainApp.config(function($routeProvider) {
             }
         }},
         templateUrl: "./views/tasks.html",
-        controller: "tasksCtrl"
+        controller: "tasksCtrl",
     })
     .when("/signup", {
         templateUrl: "./views/signup.html",
@@ -43,7 +45,8 @@ mainApp.config(function($routeProvider) {
             }
         }},
         templateUrl: "./views/tracker.html",
-        controller: "trackerCtrl"
+        controller: "trackerCtrl",
+        activePage: "tracker"
     })
     .when("/profile", {
         resolve: {
@@ -53,7 +56,8 @@ mainApp.config(function($routeProvider) {
             }
         }},
         templateUrl: "./views/profile.html",
-        controller: "profileCtrl"
+        controller: "profileCtrl",
+        activePage: "profile"
     })
     .otherwise({
         template: "<h1>Page not found</h1>"
@@ -61,7 +65,12 @@ mainApp.config(function($routeProvider) {
 });
 
 //controller
+mainApp.controller('mainCtrl', function($scope) {
+    console.log($scope.activePage)
+});
+
 mainApp.controller('profileCtrl', function($scope, $route) {
+    $scope.$parent.activePage = "profile";
     $scope.logout = function() {
         localStorage.clear();
         $route.reload();
@@ -149,6 +158,7 @@ mainApp.controller('signupCtrl', function($scope, $http, $location) {
 });
 
 mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
+    $scope.$parent.activePage = "tasks";
     if (localStorage.getItem('logged')) {
         $scope.curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
         $scope.not_edit_mode = true;
@@ -220,6 +230,7 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
 });
 
 mainApp.controller('trackerCtrl', function($scope, $http, $filter, $location) {
+    $scope.$parent.activePage = "tracker";
     curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
     $scope.applyfilter = function(date = $filter('date')($scope.filter_date, "yyyy-MM-dd")) {
         $http.get(`/api/view-track-report/${localStorage.user_id}/${date}`).then(

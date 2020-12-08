@@ -1,20 +1,20 @@
-<div class="center" style="padding:10px; width:550px;">
-    <div style="text-align:center; color:green;">
+<div class="center login">
+    <div class="form-title">
         <h3><b>User Login</b></h3>
     </div>
-    <form name="loginform" role="form">
+    <form class="login-form" name="loginform" role="form">
         <div class="form-group">
             <label for="email">Email: </label>
             <input type="email" class="text" name="email" id="email" placeholder="Enter your email-id here.." ng-blur="check_user()" ng-model="user.email_id" required>
-            <span style="color: red;" ng-show="loginform.email.$error.email">Not a valid email!!</span>
-            <span style="color: red;" ng-show="loginform.email.$dirty && invalid_user">User dosen't exists! Please try creating a new account!</span>
+            <span class="warning" ng-show="loginform.email.$error.email">Not a valid email!!</span>
+            <span class="warning" ng-show="loginform.email.$dirty && invalid_user">User dosen't exists! Please try creating a new account!</span>
         </div>
         <div class="form-group">
             <label for="password">Password: </label>
             <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password here.." ng-model="user.password" ng-minlength="6" required></input>
-            <span style="color: red;" ng-show="loginform.password.$error.minlength">Password too short!!</span>
+            <span class="warning" ng-show="loginform.password.$error.minlength">Password too short!!</span>
         </div>
-        <div class="form-group" style="text-align: center; display: flex; flex-direction: column;">
+        <div class="form-group actions">
             <a href="#!signup" style="color:green">Don't have an account?</a>
             <button class="login-btn" ng-disabled="invalid_user || loginform.$invalid" ng-click="login()">Login</button>
         </div>

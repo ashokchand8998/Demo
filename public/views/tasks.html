@@ -1,54 +1,52 @@
-<div class="center">
-    <div style="display:flex; flex-direction: column; width:100%;">
-        <form name="addform" style="display: flex; flex-direction: row; justify-content: space-around;" role="form">
-            <div class="form-group">
-                <label for="task">Title: </label>
-                <input type="text" name="task" class="text" id="task" placeholder="Enter task here.." ng-model="task.title" required>
-            </div>
-            <div class="form-group">
-                <label for="last_date">Task Deadline: </label>
-                <input type="date" class="form-control" id="last_date" value="{{curr_date}}" ng-model="task.last_date" min="{{curr_date}}" required>
-            </div>
-            <div class="form-group">
-                <button type="button" ng-disabled="!task.title" class="add-btn" ng-click="addnewtask()">Add</button>
-            </div>
-        </form>
-        
-        <form name="editform" role="form">
-            <table class="table usertasks" style="margin:10px; text-align: center;">
-                <thead>
-                    <tr>
-                        <th>Task id</th>
-                        <th>Task</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="task in tasks">
-                        <td>
-                            <span>{{task.id}}</span>
-                        </td>
-                        <td>
-                            <span ng-if="task.id !== selected.id">{{task.title}}</span>
-                            <input type="text" name="task" class="text" id="title" ng-model="selected.title" ng-if="task.id === selected.id" required>
-                        </td>
-                        <td>
-                            <span>{{task.last_date | date}}</span>
-                        </td>
-                        <td>
-                            <span ng-if="task.id !== selected.id">{{task.completed ? 'Completed' : 'Incomplete'}}</span>
-                            <input type="checkbox" class="form-control" id="status" {{selected.checked_or_not}} ng-model="selected.completed" ng-if="task.id === selected.id">
-                        </td>
-                        <td>
-                            <button type="button" class="edit-btn" ng-click="edit(task)" ng-if="task.id !== selected.id">Edit</button>
-                            <button type="button" class="update-btn" ng-disabled="not_edit_mode || editform.$invalid" ng-click="update()" ng-if="task.id === selected.id">Update</button>
-                            <button type="button" class="delete-btn" ng-click="delete(task)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+<div class="tasks-div">
+    <form class="add-form" name="addform" role="form">
+        <div class="form-group">
+            <label for="task">Title: </label>
+            <input type="text" name="task" class="text" id="task" ng-maxlength="50" placeholder="Enter task here.." ng-model="task.title" required>
+        </div>
+        <div class="form-group">
+            <label for="last_date">Task Deadline: </label>
+            <input type="date" class="form-control" id="last_date" value="{{curr_date}}" ng-model="task.last_date" min="{{curr_date}}" required>
+        </div>
+        <div class="form-group">
+            <button type="button" ng-disabled="!task.title" class="add-btn" ng-click="addnewtask()">Add</button>
+        </div>
+    </form>
+    
+    <form class="edit-form" name="editform" role="form">
+        <table class="table usertasks">
+            <thead>
+                <tr>
+                    <th>Task id</th>
+                    <th>Task</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in tasks">
+                    <td>
+                        <span>{{task.id}}</span>
+                    </td>
+                    <td>
+                        <span ng-if="task.id !== selected.id">{{task.title}}</span>
+                        <input type="text" name="task" class="text" id="title" ng-maxlength="50" ng-model="selected.title" ng-if="task.id === selected.id" required>
+                    </td>
+                    <td>
+                        <span>{{task.last_date | date}}</span>
+                    </td>
+                    <td>
+                        <span ng-if="task.id !== selected.id">{{task.completed ? 'Completed' : 'Incomplete'}}</span>
+                        <input type="checkbox" class="form-control" id="status" {{selected.checked_or_not}} ng-model="selected.completed" ng-if="task.id === selected.id">
+                    </td>
+                    <td>
+                        <button type="button" class="edit-btn" ng-click="edit(task)" ng-if="task.id !== selected.id">Edit</button>
+                        <button type="button" class="update-btn" ng-disabled="not_edit_mode || editform.$invalid" ng-click="update()" ng-if="task.id === selected.id">Update</button>
+                        <button type="button" class="delete-btn" ng-click="delete(task)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 </div>

@@ -1,26 +1,26 @@
-<div class="center" style="padding:10px; width:550px;">
-    <div style="text-align:center; color:darkcyan;">
+<div class="center signup">
+    <div class="form-title">
         <h3><b>User SignUp</b></h3>
     </div>
-    <form name="signupform" role="form">
+    <form class="signup-form" name="signupform" role="form">
         <div class="form-group">
             <label for="email">Email: </label>
             <input type="email" name="email" class="text" id="email" placeholder="Enter your email-id here.." ng-model="user.email_id" ng-blur="check_user()" required>
-            <span style="color: red;" ng-show="signupform.email.$dirty && signupform.email.$error.email">Not a valid email!!</span>
-            <span style="color: red;" ng-show="signupform.email.$dirty && user_exists">User already exists! Please try signing in!</span>
+            <span class="warning" ng-show="signupform.email.$dirty && signupform.email.$error.email">Not a valid email!!</span>
+            <span class="warning" ng-show="signupform.email.$dirty && user_exists">User already exists! Please try signing in!</span>
         </div>
         <div class="form-group">
             <label for="password">Password: </label>
             <input type="password" name="password" class="text" id="password" placeholder="Enter your password here.." ng-model="user.password" ng-minlength="6" required></input>
-            <span style="color: red;" ng-show="signupform.password.$dirty && signupform.password.$error.minlength">Password too short!!</span>
+            <span class="warning" ng-show="signupform.password.$dirty && signupform.password.$error.minlength">Password too short!!</span>
         </div>
         <div class="form-group">
             <label for="c_password">Confirm Password: </label>
             <input type="password" name="c_password" class="text" id="c_password" placeholder="Re-enter your password here.." ng-model="user.c_password" ng-minlength="6" required></input>
-            <span style="color: red;" ng-show="signupform.password.$dirty && signupform.c_password.$error.minlength">Password too short!!<br></span>
-            <span style="color: red;" ng-show="signupform.password.$dirty && (signupform.c_password.$error.minlength || user.password !== user.c_password)">Passwords don't match!!</span>
+            <span class="warning" ng-show="signupform.password.$dirty && signupform.c_password.$error.minlength">Password too short!!<br></span>
+            <span class="warning" ng-show="signupform.password.$dirty && (signupform.c_password.$error.minlength || user.password !== user.c_password)">Passwords don't match!!</span>
         </div>
-        <div class="form-group" style="text-align: center;">
+        <div class="form-group actions">
             <button class="signup-btn" ng-disabled="user_exists || user.password !== user.c_password || signupform.$invalid" ng-click="signup()">SignUp</button>
             <a href="#!/" style="color:green">Sign in instead?</a>
         </div>

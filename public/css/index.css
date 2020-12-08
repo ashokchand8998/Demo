@@ -1,11 +1,10 @@
 body {
-  background-color: white;
+  background-color: #f3e6e6;
   margin: 0;
 }
 
 button {
   border-radius: 5px;
-  font-size: large;
   padding: 5px;
   font-family: Arial;
   font-weight: bold;
@@ -26,24 +25,24 @@ header .main-nav {
 header .nav-tabs {
   list-style-type: none;
   margin: 0;
-  padding: 5px;
-  margin: 0;
+  padding: 5px 5px;
 }
 header .nav-tabs .nav-item {
   display: inline;
   font-size: x-large;
   font-weight: bold;
   font-family: cursive;
+  padding: 5px;
 }
 header .nav-tabs .nav-item a {
   color: white;
-  padding: 5px;
-}
-header .nav-tabs .nav-item :active {
-  background: green;
+  padding: 0 15px;
 }
 header .nav-tabs :hover {
   background-color: black;
+}
+header .nav-tabs .active {
+  background-color: blue;
 }
 header .nav-link {
   color: black;
@@ -52,7 +51,7 @@ header .nav-link {
 
 .center {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   align-items: center;
 }
 .center .nav-tabs {
@@ -66,7 +65,7 @@ header .nav-link {
 }
 .center form {
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   align-items: left;
 }
 .center form div {
@@ -79,21 +78,168 @@ input {
   outline: none;
   border-radius: 5px;
   border: 2px solid skyblue;
-  padding: 10px;
-  font-size: large;
+  padding: 5px;
+  font-size: 16px;
 }
 input :focus {
   border: 30px solid green;
 }
 
+.signup .form-title {
+  color: blue;
+  font-size: large;
+}
+.signup .signup-form {
+  font-size: 18px;
+  max-width: 100%;
+  width: 500px;
+}
+.signup input {
+  font-size: 16px;
+  padding: 10px;
+}
+.signup .actions {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  align-items: center;
+}
+.signup .actions .signup-btn {
+  font-size: 16px;
+  padding: 7px;
+  margin: 5px;
+  background-color: lightblue;
+}
+
+.login .form-title {
+  color: green;
+  font-size: large;
+}
+.login .login-form {
+  font-size: 18px;
+  max-width: 100%;
+  width: 500px;
+}
+.login input {
+  font-size: 16px;
+  padding: 10px;
+}
+.login .actions {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  align-items: center;
+}
+.login .actions .login-btn {
+  font-size: 16px;
+  padding: 7px;
+  margin: 5px;
+  background-color: lightgreen;
+}
+
+.tasks-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-form {
+  width: 100%;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.add-form .form-group {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px 50px;
+}
+.add-form .add-btn {
+  font-size: 16px;
+  background-color: lightgreen;
+}
+
+.edit-form {
+  margin: 10px;
+  min-width: fit-content;
+  border: 2px solid black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
 table {
   border-collapse: collapse;
-  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  margin: 5px;
+}
+table th {
+  font-size: medium;
+  padding: 5px;
 }
 table td {
-  border-top: 2px solid black;
-  padding: 2px 0;
+  border-top: 1px solid black;
+  padding: 5px;
   margin: 0;
+  width: fit-content;
+}
+table td button {
+  margin: 0 5px;
+}
+table td .edit-btn {
+  background-color: lightblue;
+}
+table td .update-btn {
+  background-color: yellow;
+}
+table td .delete-btn {
+  background-color: red;
+}
+
+.profile {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding: 10px;
+}
+.profile .logout-btn {
+  background-color: red;
+}
+
+.tracker {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 10px;
+}
+.tracker .filter {
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.tracker .filter .filter-form {
+  display: flex;
+  flex-flow: row wrap;
+}
+.tracker .filter .filter-form .form-control {
+  margin: 10px;
+}
+.tracker .filter .filter-form .filter-btn {
+  padding: 7px;
+  background-color: lightblue;
+}
+
+.warning {
+  color: red;
 }
 
 /*# sourceMappingURL=index.css.map */

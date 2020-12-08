@@ -1,10 +1,9 @@
 body {
-    background-color:white;
+    background-color:#f3e6e6;
     margin: 0;
 }
 button {
     border-radius: 5px;
-    font-size: large;
     padding: 5px;
     font-family: Arial;
     font-weight: bold;
@@ -25,25 +24,26 @@ header {
     .nav-tabs {
         list-style-type: none;
         margin:0;
-        padding: 5px;
-        margin:0;
+        padding: 5px 5px;
         .nav-item {
             display: inline;;
             font-size: x-large;
             font-weight: bold;
             font-family: cursive;
+            padding: 5px;
             a {
                 color: white;
-                padding: 5px;
-            };
-            :active {
-                background: green;
+                padding: 0 15px;
             };
         }
         :hover {
             background-color:black;
         };
+        .active {
+            background-color: blue;
+        };
     }
+
     .nav-link {
         color: black;
         text-decoration: chartreuse;
@@ -51,7 +51,7 @@ header {
 }
 .center {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     align-items: center;
     .nav-tabs {
         list-style-type: none;
@@ -64,12 +64,12 @@ header {
     }
     form {
         display: flex;
-        flex-direction: column;
+        flex-flow: column;
         align-items: left;
         div {
             margin-top: 10px;
             display: flex;
-            flex-flow: column wrap
+            flex-flow: column wrap;
         }
     }
 }
@@ -77,18 +77,170 @@ input {
     outline:none;
     border-radius: 5px;
     border: 2px solid skyblue;
-    padding: 10px;
-    font-size: large;
+    padding: 5px;
+    font-size: 16px;
     :focus {
         border: 30px solid green;
     }
 }
-table {
-    border-collapse: collapse;
-    width: 100%;
-    td {
-        border-top: 2px solid black;
-        padding: 2px 0;
-        margin:0
+
+.signup {
+    .form-title {
+        color: blue;
+        font-size: large;
+    }
+    .signup-form {
+        font-size: 18px;
+        max-width: 100%;
+        width: 500px;
+    }
+    input {
+        font-size: 16px;
+        padding: 10px;
+    }
+    .actions {
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        align-items: center;
+        .signup-btn {
+            font-size: 16px;
+            padding: 7px;
+            margin: 5px;
+            background-color: lightblue;
+        }
     }
 }
+
+.login {
+    .form-title {
+        color: green;
+        font-size: large;
+    }
+    .login-form {
+        font-size: 18px;
+        max-width: 100%;
+        width: 500px;
+    }
+    input {
+        font-size: 16px;
+        padding: 10px;
+    }
+    .actions {
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        align-items: center;
+        .login-btn {
+            font-size: 16px;
+            padding: 7px;
+            margin: 5px;
+            background-color: lightgreen;
+        }
+    }
+}
+
+.tasks-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-form {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .form-group {
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        margin: 5px 50px;
+    }
+    .add-btn {
+        font-size: 16px;
+        background-color: lightgreen;
+    }
+}
+
+.edit-form{
+    margin: 10px;
+    min-width: fit-content;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+    max-width: 100%;
+    text-align: center;
+    margin: 5px;
+    th {
+        font-size: medium;
+        padding: 5px;
+    }
+    td {
+        border-top: 1px solid black;
+        padding: 5px;
+        margin:0;
+        width: fit-content;
+        button {
+            margin: 0 5px;
+        }
+        .edit-btn {
+            background-color: lightblue;
+        }
+        .update-btn {
+            background-color: yellow;
+        }
+        .delete-btn {
+            background-color: red;
+        }
+    }
+}
+
+.profile {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+    .logout-btn {
+        background-color: red;
+    }
+}
+
+.tracker {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 10px;
+    .filter {
+        margin: 10px;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .filter-form {
+            display: flex;
+            flex-flow: row wrap;
+            .form-control {
+                margin:10px;
+            }
+            .filter-btn {
+                padding: 7px;
+                background-color: lightblue;
+            }
+        }
+    }
+}
+
+.warning {
+    color: red;
+  }

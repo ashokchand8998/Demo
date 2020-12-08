@@ -17,6 +17,7 @@
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "pg-promise": "^10.8.0",
+    "sass": "^1.30.0",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
