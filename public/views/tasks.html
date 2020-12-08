@@ -10,7 +10,7 @@
                 <input type="date" class="form-control" id="last_date" value="{{curr_date}}" ng-model="task.last_date" min="{{curr_date}}" required>
             </div>
             <div class="form-group">
-                <button type="button" ng-disabled="addform.$invalid" class="add-btn" ng-click="addnewtask()">Add</button>
+                <button type="button" ng-disabled="!task.title" class="add-btn" ng-click="addnewtask()">Add</button>
             </div>
         </form>
         

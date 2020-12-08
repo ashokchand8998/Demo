@@ -4,6 +4,8 @@
             <input class="form-control" type="date" ng-model="filter_date" required>
             <button ng-click="applyfilter()" ng-disabled="filterform.$invalid || {{!!filter_date}}">Apply filter</button>
     </div>
-    <div zingchart id="myChart" zc-values="data" zc-json="myJson" zc-height="500" zc-width="600">
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <div zingchart id="myChart" zc-values="data" zc-json="myJson">
+        </div>
     </div>
 </div>

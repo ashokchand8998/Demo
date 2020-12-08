@@ -53,6 +53,7 @@ exports.create = (req, res) => {
     const passobject = setHashedPassword(req.body.password);
     const user = {
         email_id: req.body.email_id,
+        admin: req.body.admin ? req.body.admin : false,
         password: passobject.hash,
         salt: passobject.salt
     }
@@ -62,7 +63,7 @@ exports.create = (req, res) => {
     .then(function(data) {
         res.send({
             id: data.id,
-            email_id: data.email_id
+            email_id: data.email_id,
         });
     })
     .catch(function(err) {
@@ -130,18 +131,36 @@ exports.update = (req, res) => {
 
 //Tracker Report
 exports.getTrackReport = (req, res) => {
+    user_id = req.params.uid;
     date = req.params.date;
-    if(date) {
-        sequelize.query(`SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id WHERE last_date = '${date}' GROUP BY email_id;`)
-        .then(function(results, metadata) {
-            res.send(results[0])
-        })
-        .catch(function(err) {
-            res.status(500).send({
-                message: err.message
-            })
-        })
-    }
+    User.findOne({
+        where: {
+            id: user_id
+        }
+    }).then(function(data) {
+         if(data["admin"]) {
+            if(date) {
+                sequelize.query(`SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id WHERE last_date = '${date}' GROUP BY email_id;`)
+                .then(function(results, metadata) {
+                    res.send(results[0])
+                })
+                .catch(function(err) {
+                    res.status(500).send({
+                        message: err.message
+                    })
+                })
+            }
+         } else {
+             res.status(404).send({
+                 message: "You don't have access to this page!!"
+             })
+         }
+    }).catch(function(err) {
+        res.status(500).send({
+            message: err.message || "Some error has occured while retriving user!!"
+        });
+    });
+        
 }
 
 //Delete a User with the specified email_id in the request

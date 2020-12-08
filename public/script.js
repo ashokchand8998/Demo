@@ -156,7 +156,6 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
 
         $scope.addnewtask = function() {
             $scope.task.user_id = localStorage.getItem('user_id');
-            console.log($scope.task.last_date)
             if(!$scope.task.last_date) {
                 $scope.task.last_date = $scope.curr_date;;
             }
@@ -220,17 +219,15 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
     }
 });
 
-mainApp.controller('trackerCtrl', function($scope, $http, $filter) {
+mainApp.controller('trackerCtrl', function($scope, $http, $filter, $location) {
     curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
     $scope.applyfilter = function(date = $filter('date')($scope.filter_date, "yyyy-MM-dd")) {
-        console.log("filter button clicked", date)
-        $http.get(`/api/view-track-report/${date}`).then(
+        $http.get(`/api/view-track-report/${localStorage.user_id}/${date}`).then(
             function successCallback(response) {
                 let all_emails = [null];
                 let total_tasks = [null];
                 let completed_tasks = [null];
                 $scope.users = response.data;
-                console.log("users", $scope.users)
                 for(let user in $scope.users) {
                     all_emails.push($scope.users[user]['email_id']);
                     total_tasks.push(parseInt($scope.users[user]['total_tasks']));
@@ -280,7 +277,8 @@ mainApp.controller('trackerCtrl', function($scope, $http, $filter) {
                 };
             },
             function errorCallback(response) {
-                alert(response.message);
+                alert(response.data.message);
+                $location.path("/")
             }
         );
     };

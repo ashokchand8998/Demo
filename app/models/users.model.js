@@ -9,6 +9,9 @@ module.exports = function(sequlize, Sequelize) {
                 isEmail: true
             }
         },
+        admin: {
+            type: Sequelize.BOOLEAN
+        },
         password:{
             type: Sequelize.STRING,
             allowNull: false,
