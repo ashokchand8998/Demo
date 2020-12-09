@@ -7,6 +7,7 @@ button {
     padding: 5px;
     font-family: Arial;
     font-weight: bold;
+    cursor: pointer;
 }
 header {
     .title {
@@ -164,6 +165,7 @@ input {
     .add-btn {
         font-size: 16px;
         background-color: lightgreen;
+        cursor: pointer;
     }
 }
 
@@ -228,11 +230,11 @@ table {
         display: flex;
         justify-content: center;
         .filter-form {
+            width: 100%;
             display: flex;
             flex-flow: row wrap;
-            .form-control {
-                margin:10px;
-            }
+            justify-content: space-around;
+            align-items: center;
             .filter-btn {
                 padding: 7px;
                 background-color: lightblue;
