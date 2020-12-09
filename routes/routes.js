@@ -18,7 +18,10 @@ router.get('/api/gettask/:uid/:id', function(req, res) {
     tasks.findOne(req, res);
 })
 
+<<<<<<< HEAD
 //getting track report data
+=======
+>>>>>>> 79056552adeb9e14b4f83f01a1b9d0c91a103347
 router.get('/api/view-track-report/:uid/:start_date/:end_date', function(req, res) {
     users.getTrackReport(req, res);
 })
