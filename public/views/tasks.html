@@ -41,7 +41,7 @@
                         <input type="checkbox" class="form-control" id="status" {{selected.checked_or_not}} ng-model="selected.completed" ng-if="task.id === selected.id">
                     </td>
                     <td>
-                        <button type="button" class="edit-btn" ng-click="edit(task)" ng-if="task.id !== selected.id">Edit</button>
+                        <button type="button" class="edit-btn" ng-click="edit(task)" ng-disabled="{{task.last_date < curr_date}}" ng-if="task.id !== selected.id">Edit</button>
                         <button type="button" class="update-btn" ng-disabled="not_edit_mode || editform.$invalid" ng-click="update()" ng-if="task.id === selected.id">Update</button>
                         <button type="button" class="delete-btn" ng-click="delete(task)">Delete</button>
                     </td>

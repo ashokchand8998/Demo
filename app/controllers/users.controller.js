@@ -132,15 +132,16 @@ exports.update = (req, res) => {
 //Tracker Report
 exports.getTrackReport = (req, res) => {
     user_id = req.params.uid;
-    date = req.params.date;
+    start_date = req.params.start_date;
+    end_date = req.params.end_date;
     User.findOne({
         where: {
             id: user_id
         }
     }).then(function(data) {
          if(data["admin"]) {
-            if(date) {
-                sequelize.query(`SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id WHERE last_date = '${date}' GROUP BY email_id;`)
+            if(start_date && end_date) {
+                sequelize.query(`SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id WHERE last_date >= '${start_date}' AND last_date <= '${end_date}' GROUP BY email_id;`)
                 .then(function(results, metadata) {
                     res.send(results[0])
                 })

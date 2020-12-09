@@ -13,11 +13,13 @@ router.get('/api/getalltasks/:uid', function(req, res) {
     tasks.findAll(req, res);
 });
 
+//getting all tasks data
 router.get('/api/gettask/:uid/:id', function(req, res) {
     tasks.findOne(req, res);
 })
 
-router.get('/api/view-track-report/:uid/:date/', function(req, res) {
+//getting track report data
+router.get('/api/view-track-report/:uid/:start_date/:end_date', function(req, res) {
     users.getTrackReport(req, res);
 })
 
@@ -26,14 +28,17 @@ router.post('/api/add-user', function(req, res) {
     users.create(req, res);
 })
 
+//checking whether user exists
 router.post('/api/check-user', function(req, res) {
     users.find(req, res);
 })
 
+//authenticating user while logging in
 router.post('/api/user-login', function(req, res) {
     users.authenticate(req, res);
 })
 
+//adding new task request
 router.post('/api/addnewtask/:uid', function(req, res) {
     tasks.create(req, res);
 });
@@ -48,8 +53,9 @@ router.put('/api/task/:uid/:id', function(req, res) {
     tasks.update(req, res);
 })
 
-// router.use(function(req, res) {
-//     res.status(404).send({url:req.originalUrl + ' not found'});
-// });
+router.use(function(req, res) {
+    res.status(404).send({message: "Cannot access the requested page!"});
+});
+
 //elements that can be accessed when this file is imported
 module.exports = router;

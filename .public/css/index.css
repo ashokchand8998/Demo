@@ -8,7 +8,6 @@ button {
   padding: 5px;
   font-family: Arial;
   font-weight: bold;
-  cursor: pointer;
 }
 
 header .title {
@@ -162,7 +161,7 @@ input :focus {
 }
 .add-form .add-btn {
   font-size: 16px;
-  background-color: lightgreen;
+  background-color: black;
 }
 
 .edit-form {

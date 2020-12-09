@@ -6,7 +6,6 @@ mainApp.factory('pageService', function() {
     obj.setPage = function(page_name) {
         obj.page = page_name;
     }
-    console.log("dfdf")
     return obj;
 });
 
@@ -66,7 +65,7 @@ mainApp.config(function($routeProvider) {
 
 //controller
 mainApp.controller('mainCtrl', function($scope) {
-    console.log($scope.activePage)
+    //nothing here
 });
 
 mainApp.controller('profileCtrl', function($scope, $route) {
@@ -173,7 +172,7 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
                 function successCallback(response) {
                     $scope.task = {};
                     alert("Tasks added successfully!!");
-                    $route.reload();
+                    showData();
                 },
                 function errorCallback(response) {
                     alert(JSON.stringify(response.data));
@@ -181,14 +180,18 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
             );
         };
 
-        $http.get(`/api/getalltasks/${localStorage.getItem('user_id')}`).then(
-            function successCallback(response) {
-                $scope.tasks = response.data;
-            },
-            function errorCallback(response) {
-                alert(response.data.message);
-            }
-        );
+        const showData = function() {
+            $http.get(`/api/getalltasks/${localStorage.getItem('user_id')}`).then(
+                function successCallback(response) {
+                    $scope.tasks = response.data;
+                },
+                function errorCallback(response) {
+                    alert(response.data.message);
+                }
+            );
+        }
+
+        showData();
 
         $scope.edit = function(selectedtask) {
             $scope.selected = angular.copy(selectedtask);
@@ -206,7 +209,7 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
                 function successCallback(response) {
                     $scope.selected = {};
                     alert("Task updated successfully");
-                    $route.reload();
+                    showData();
                 },
                 function errorCallback(response) {
                     alert(response.message);
@@ -218,7 +221,7 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
             $http.delete(`/api/delete-task/${task.user_id}/${task.id}`).then(
                 function successCallback(response) {
                     alert(response.data.message);
-                    $route.reload();
+                    showData();
                 },
                 function errorCallback(response) {
                     alert(response.data.message);
@@ -232,8 +235,10 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
 mainApp.controller('trackerCtrl', function($scope, $http, $filter, $location) {
     $scope.$parent.activePage = "tracker";
     curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
-    $scope.applyfilter = function(date = $filter('date')($scope.filter_date, "yyyy-MM-dd")) {
-        $http.get(`/api/view-track-report/${localStorage.user_id}/${date}`).then(
+
+    $scope.applyfilter = function(start = $filter('date')($scope.start_date, "yyyy-MM-dd"), end = $filter('date')($scope.end_date, "yyyy-MM-dd")) {
+        console.log(`/api/view-track-report/${localStorage.user_id}/${start}/${end}`)
+        $http.get(`/api/view-track-report/${localStorage.user_id}/${start}/${end}`).then(
             function successCallback(response) {
                 let all_emails = [null];
                 let total_tasks = [null];
@@ -293,5 +298,5 @@ mainApp.controller('trackerCtrl', function($scope, $http, $filter, $location) {
             }
         );
     };
-    $scope.applyfilter(curr_date)
+    $scope.applyfilter(curr_date, curr_date)
 });

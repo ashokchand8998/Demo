@@ -1,4 +1,4 @@
-//not understoor and not working
+//not understood and not working
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');

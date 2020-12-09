@@ -1,8 +1,17 @@
 <div class="center tracker">
     <div class="filter">
         <form name="filterform" class="filter-form" role="form">
-            <input class="form-control" type="date" ng-model="filter_date" required>
-            <button class="form-control filter-btn" ng-click="applyfilter()" ng-disabled="filterform.$invalid || {{!!filter_date}}">Apply filter</button>
+            <div class="form-group">
+                <label for="start_date">From: </label>
+                <input id="start_date" class="form-control" type="date" ng-model="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">To: </label>
+                <input id="end_date" class="form-control" type="date" ng-model="end_date" required>
+            </div>
+            <div class="form-group">
+                <button class="form-control filter-btn" ng-click="applyfilter()" ng-disabled="filterform.$invalid || {{!!filter_date}}">Apply filter</button>
+            </div>
     </div>
     <div class="chart">
         <div zingchart id="myChart" zc-values="data" zc-json="myJson" zc-width="1000">
