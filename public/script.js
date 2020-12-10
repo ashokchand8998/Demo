@@ -149,19 +149,19 @@ mainApp.controller('signupCtrl', function($scope, $http, $location) {
 
 mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
     $scope.$parent.activePage = "tasks";
+    $scope.task = {};
     if (localStorage.getItem('logged')) {
-        $scope.curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
+        $scope.task.curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
+        $scope.task.last_date = new Date();
         $scope.not_edit_mode = true;
         $scope.edit_id = null;
 
         $scope.addnewtask = function() {
             $scope.task.user_id = localStorage.getItem('user_id');
-            if(!$scope.task.last_date) {
-                $scope.task.last_date = $scope.curr_date;;
-            }
             $http.post(`/api/addnewtask/${localStorage.getItem('user_id')}`, $scope.task).then(
                 function successCallback(response) {
                     $scope.task = {};
+                    $scope.task.last_date = new Date();
                     alert("Tasks added successfully!!");
                     showData();
                 },
@@ -243,7 +243,6 @@ mainApp.controller('trackerCtrl', function($scope, $http, $filter, $location) {
     curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
 
     $scope.applyfilter = function(start = $filter('date')($scope.start_date, "yyyy-MM-dd"), end = $filter('date')($scope.end_date, "yyyy-MM-dd")) {
-        console.log(`/api/view-track-report/${localStorage.user_id}/${start}/${end}`)
         $http.get(`/api/view-track-report/${localStorage.user_id}/${start}/${end}`).then(
             function successCallback(response) {
                 let all_emails = [null];

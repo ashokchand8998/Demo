@@ -2,11 +2,11 @@
     <form class="add-form" name="addform" role="form">
         <div class="form-group">
             <label for="task">Title: </label>
-            <input type="text" name="task" class="text" id="task" ng-maxlength="100" placeholder="Enter task here.." ng-model="task.title" required>
+            <input type="text" name="task" class="text" id="task" ng-maxlength="250" placeholder="Enter task here.." ng-model="task.title" required>
         </div>
         <div class="form-group">
             <label for="last_date">Task Deadline: </label>
-            <input type="date" class="form-control" id="last_date" value="{{curr_date}}" ng-model="task.last_date" min="{{curr_date}}" required>
+            <input type="date" class="form-control" id="last_date" ng-model="task.last_date" min="{{curr_date}}" required>
         </div>
         <div class="form-group">
             <button type="button" ng-disabled="!task.title" class="add-btn" ng-click="addnewtask()">Add</button>
@@ -23,7 +23,7 @@
                     <div id="task-content" class="element-content">
                         <div>
                             <span ng-if="task.id !== selected.id">{{task.title}}</span>
-                            <input type="text" name="task" class="text" id="title" ng-maxlength="100" ng-model="selected.title" ng-if="task.id === selected.id" required>    
+                            <input type="text" name="task" class="text" id="title" ng-maxlength="250" ng-model="selected.title" ng-if="task.id === selected.id" required>    
                         </div>
                         <div id="deadline" ng-if="task.id !== selected.id">
                             <span>{{task.last_date | date}}</span>
