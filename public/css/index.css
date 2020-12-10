@@ -1,13 +1,16 @@
 body {
   background-color: #f3e6e6;
   margin: 0;
+  font-family: Arial;
+  font-size: 15px;
 }
 
 button {
+  border: none;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
+  text-decoration: none;
   font-family: Arial;
-  font-weight: bold;
   cursor: pointer;
 }
 
@@ -30,7 +33,7 @@ header .nav-tabs {
 }
 header .nav-tabs .nav-item {
   display: inline;
-  font-size: x-large;
+  font-size: large;
   font-weight: bold;
   font-family: cursive;
   padding: 5px;
@@ -43,7 +46,7 @@ header .nav-tabs :hover {
   background-color: black;
 }
 header .nav-tabs .active {
-  background-color: blue;
+  background-color: black;
 }
 header .nav-link {
   color: black;
@@ -79,8 +82,8 @@ input {
   outline: none;
   border-radius: 5px;
   border: 2px solid skyblue;
-  padding: 5px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 13px;
 }
 input :focus {
   border: 30px solid green;
@@ -91,12 +94,12 @@ input :focus {
   font-size: large;
 }
 .signup .signup-form {
-  font-size: 18px;
+  font-size: 16px;
   max-width: 100%;
   width: 500px;
 }
 .signup input {
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px;
 }
 .signup .actions {
@@ -107,7 +110,6 @@ input :focus {
 }
 .signup .actions .signup-btn {
   font-size: 16px;
-  padding: 7px;
   margin: 5px;
   background-color: lightblue;
 }
@@ -117,12 +119,12 @@ input :focus {
   font-size: large;
 }
 .login .login-form {
-  font-size: 18px;
+  font-size: 16px;
   max-width: 100%;
   width: 500px;
 }
 .login input {
-  font-size: 16px;
+  font-size: 14px;
   padding: 10px;
 }
 .login .actions {
@@ -133,7 +135,6 @@ input :focus {
 }
 .login .actions .login-btn {
   font-size: 16px;
-  padding: 7px;
   margin: 5px;
   background-color: lightgreen;
 }
@@ -154,7 +155,6 @@ input :focus {
   align-items: center;
 }
 .add-form .form-group {
-  font-weight: bold;
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -163,44 +163,77 @@ input :focus {
 .add-form .add-btn {
   font-size: 16px;
   background-color: lightgreen;
+  cursor: pointer;
 }
 
 .edit-form {
-  margin: 10px;
-  min-width: fit-content;
-  border: 2px solid black;
-  border-radius: 5px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.list {
+  border-collapse: collapse;
+  text-align: center;
+  margin: 20px;
+  font-size: 15px;
+  padding: 0px;
+}
+.list .list-element {
+  display: grid;
+  grid-template-columns: min-content auto auto;
+  border-bottom: 1px solid green;
+  padding: 5px 0;
+  text-align: left;
+}
+.list .list-element .default-btn {
+  display: none;
+}
+.list .list-element #status {
   display: flex;
   justify-content: center;
 }
-
-table {
-  border-collapse: collapse;
-  max-width: 100%;
-  text-align: center;
+.list .list-element #status #status-check {
+  width: 20px;
+  height: 20px;
+}
+.list .list-element #task-content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+}
+.list .list-element #task-content #title {
+  border: none;
+  height: 100%;
+  width: 100%;
+}
+.list .list-element #task-content div {
   margin: 5px;
 }
-table th {
-  font-size: medium;
-  padding: 5px;
+.list .list-element #task-content #deadline {
+  font-size: 12px;
+  opacity: 0.7;
 }
-table td {
-  border-top: 1px solid black;
-  padding: 5px;
-  margin: 0;
-  width: fit-content;
+.list .list-element #actions {
+  margin-left: auto;
+  display: inline-block;
 }
-table td button {
+.list .list-element button {
   margin: 0 5px;
 }
-table td .edit-btn {
+.list .list-element .edit-btn {
   background-color: lightblue;
 }
-table td .update-btn {
+.list .list-element .update-btn {
   background-color: yellow;
 }
-table td .delete-btn {
+.list .list-element .delete-btn {
   background-color: red;
+}
+.list .list-element .cancel-btn {
+  background-color: lightblue;
+}
+.list :hover .default-btn {
+  display: inline-block;
 }
 
 .profile {
@@ -235,12 +268,20 @@ table td .delete-btn {
   align-items: center;
 }
 .tracker .filter .filter-form .filter-btn {
-  padding: 7px;
   background-color: lightblue;
 }
 
 .warning {
   color: red;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 20px 0;
+  background-color: black;
+  color: white;
 }
 
 /*# sourceMappingURL=index.css.map */

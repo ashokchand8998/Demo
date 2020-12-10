@@ -2,11 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
 
-/*var url = require("url")
-var dt = require("./myfirstmodule")
-var fs = require("fs")
-*/
-
 const app = express();
 
 //allow static pages to load
@@ -16,11 +11,6 @@ app.use(express.static(__dirname + "/public"));
 Code to use and interact with database using sequelize
 */
 const db = require("./app/models");
-
-//In development, you may need to drop existing tables and re-sync database. Just use force: true as following code:
-// db.sequelize.sync({force: true}).then(function() {
-//     console.log("Drop and re-sync db.");
-// });
 
 //don't know whether cors is needed in current context
 var corsOptions = {

@@ -1,14 +1,5 @@
 const mainApp = angular.module("mainApp", ["ngRoute", "zingchart-angularjs"]);
 
-//services
-mainApp.factory('pageService', function() {
-    let obj = {}
-    obj.setPage = function(page_name) {
-        obj.page = page_name;
-    }
-    return obj;
-});
-
 //routes
 mainApp.config(function($routeProvider) {
     $routeProvider
@@ -180,8 +171,8 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
             );
         };
 
-        const showData = function() {
-            $http.get(`/api/getalltasks/${localStorage.getItem('user_id')}`).then(
+        const showData = function(condition=false) {
+            $http.get(`/api/getalltasks/${localStorage.getItem('user_id')}/${condition}`).then(
                 function successCallback(response) {
                     $scope.tasks = response.data;
                 },
@@ -199,16 +190,13 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
             $scope.not_edit_mode = false;
             $scope.selected.last_date = new Date($scope.selected.last_date)
         };
-        $scope.update = function() {
-            let data = {
-                title: $scope.selected.title,
-                last_date: $scope.selected.last_date,
-                completed: $scope.selected.completed
-            };
-            $http.put(`/api/task/${localStorage.getItem('user_id')}/${$scope.selected.id}`, data).then(
+
+        updateTasks = function(task_id, data) {
+            $http.put(`/api/task/${localStorage.getItem('user_id')}/${task_id}`, data).then(
                 function successCallback(response) {
                     $scope.selected = {};
-                    alert("Task updated successfully");
+                    let message = data.completed ? "1 task completed" : "Task updated successfully"
+                    alert(message);
                     showData();
                 },
                 function errorCallback(response) {
@@ -216,6 +204,24 @@ mainApp.controller('tasksCtrl', function($route, $scope, $http, $filter) {
                     $route.reload();
                 }
             )
+        }
+        $scope.setCompleted = function(task_id) {
+            let data = {
+                completed: true
+            }
+            updateTasks(task_id, data);
+        }
+
+        $scope.cancel = function() {
+            $scope.selected = {};
+        }
+
+        $scope.update = function() {
+            let data = {
+                title: $scope.selected.title,
+                last_date: $scope.selected.last_date
+            };
+            updateTasks($scope.selected.id, data);
         };
         $scope.delete = function(task) {
             $http.delete(`/api/delete-task/${task.user_id}/${task.id}`).then(

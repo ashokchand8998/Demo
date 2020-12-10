@@ -1,12 +1,15 @@
 body {
     background-color:#f3e6e6;
     margin: 0;
+    font-family: Arial;
+    font-size: 15px;
 }
 button {
+    border: none;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
+    text-decoration: none;
     font-family: Arial;
-    font-weight: bold;
     cursor: pointer;
 }
 header {
@@ -28,7 +31,7 @@ header {
         padding: 5px 5px;
         .nav-item {
             display: inline;;
-            font-size: x-large;
+            font-size: large;
             font-weight: bold;
             font-family: cursive;
             padding: 5px;
@@ -41,7 +44,7 @@ header {
             background-color:black;
         };
         .active {
-            background-color: blue;
+            background-color: black;
         };
     }
 
@@ -78,8 +81,8 @@ input {
     outline:none;
     border-radius: 5px;
     border: 2px solid skyblue;
-    padding: 5px;
-    font-size: 16px;
+    padding: 10px;
+    font-size: 13px;
     :focus {
         border: 30px solid green;
     }
@@ -91,12 +94,12 @@ input {
         font-size: large;
     }
     .signup-form {
-        font-size: 18px;
+        font-size: 16px;
         max-width: 100%;
         width: 500px;
     }
     input {
-        font-size: 16px;
+        font-size: 14px;
         padding: 10px;
     }
     .actions {
@@ -106,7 +109,6 @@ input {
         align-items: center;
         .signup-btn {
             font-size: 16px;
-            padding: 7px;
             margin: 5px;
             background-color: lightblue;
         }
@@ -119,12 +121,12 @@ input {
         font-size: large;
     }
     .login-form {
-        font-size: 18px;
+        font-size: 16px;
         max-width: 100%;
         width: 500px;
     }
     input {
-        font-size: 16px;
+        font-size: 14px;
         padding: 10px;
     }
     .actions {
@@ -134,7 +136,6 @@ input {
         align-items: center;
         .login-btn {
             font-size: 16px;
-            padding: 7px;
             margin: 5px;
             background-color: lightgreen;
         }
@@ -156,7 +157,6 @@ input {
     justify-content: center;
     align-items: center;
     .form-group {
-        font-weight: bold;
         display: flex;
         flex-direction: column;
         padding: 5px;
@@ -170,28 +170,54 @@ input {
 }
 
 .edit-form{
-    margin: 10px;
-    min-width: fit-content;
-    border: 2px solid black;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
+    max-width: 100%;
+    width: 100%;
 }
 
-table {
+.list {
     border-collapse: collapse;
-    max-width: 100%;
     text-align: center;
-    margin: 5px;
-    th {
-        font-size: medium;
-        padding: 5px;
-    }
-    td {
-        border-top: 1px solid black;
-        padding: 5px;
-        margin:0;
-        width: fit-content;
+    margin: 20px;
+    font-size: 15px;
+    padding: 0px;
+    .list-element {
+        display: grid;
+        grid-template-columns: min-content auto auto;
+        border-bottom: 1px solid green;
+        padding: 5px 0;
+        text-align: left;
+        .default-btn {
+            display: none;
+        }
+        #status {
+            display: flex;
+            justify-content: center;
+            #status-check {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        #task-content {
+            display: flex;
+            flex-direction: column;
+            padding-left: 5px;
+            #title {
+                border: none;
+                height: 100%;
+                width: 100%
+            }
+            div {
+                margin: 5px;
+            }
+            #deadline {
+                font-size: 12px;
+                opacity: 0.7;
+            }
+        }
+        #actions {
+            margin-left: auto;
+            display: inline-block;
+        }
         button {
             margin: 0 5px;
         }
@@ -203,6 +229,14 @@ table {
         }
         .delete-btn {
             background-color: red;
+        }
+        .cancel-btn {
+            background-color: lightblue;
+        }
+    }
+    :hover {
+        .default-btn {
+            display: inline-block;
         }
     }
 }
@@ -236,7 +270,6 @@ table {
             justify-content: space-around;
             align-items: center;
             .filter-btn {
-                padding: 7px;
                 background-color: lightblue;
             }
         }
@@ -246,3 +279,12 @@ table {
 .warning {
     color: red;
   }
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 20px 0;
+    background-color: black;
+    color: white;
+}

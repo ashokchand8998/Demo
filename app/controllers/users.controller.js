@@ -141,7 +141,14 @@ exports.getTrackReport = (req, res) => {
     }).then(function(data) {
          if(data["admin"]) {
             if(start_date && end_date) {
-                sequelize.query(`SELECT email_id, count(title) AS total_tasks, SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks FROM public.task RIGHT JOIN public.user ON public.task.user_id = public.user.id WHERE last_date >= '${start_date}' AND last_date <= '${end_date}' GROUP BY email_id;`)
+                sequelize.query(`SELECT 
+                email_id,
+                 count(title) AS total_tasks, 
+                 SUM(CASE WHEN completed THEN 1 ELSE 0 END) AS completed_tasks 
+                 FROM public.task RIGHT JOIN public.user 
+                 ON public.task.user_id = public.user.id 
+                 WHERE last_date >= '${start_date}' AND last_date <= '${end_date}' 
+                 GROUP BY email_id;`)
                 .then(function(results, metadata) {
                     res.send(results[0])
                 })

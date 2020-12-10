@@ -38,7 +38,8 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Task.findAll({
         where: {
-            user_id: req.params.uid
+            user_id: req.params.uid,
+            completed: req.params.completed
         }
     })
     .then(function(data) {
@@ -51,23 +52,23 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single Task with id
-exports.findOne = (req, res) => {
-    Task.findOne({
-        where: {
-            user_id: req.params.uid,
-            id: req.params.id
-        }
-    })
-    .then(function(data) {
-        res.send(data);
-    })
-    .catch(function(err) {
-        res.status(500).send({
-            message: err.message || "Some error has occured while retriving task"
-        });
-    });
-};
+// // Find a single Task with id
+// exports.findOne = (req, res) => {
+//     Task.findOne({
+//         where: {
+//             user_id: req.params.uid,
+//             id: req.params.id
+//         }
+//     })
+//     .then(function(data) {
+//         res.send(data);
+//     })
+//     .catch(function(err) {
+//         res.status(500).send({
+//             message: err.message || "Some error has occured while retriving task"
+//         });
+//     });
+// };
 
 //Update a Task by the email in the request
 exports.update = (req, res) => {

@@ -1,4 +1,5 @@
 const express = require('express');
+
 //create a mini_app(express.Router instead of using main_app(express())
 const router = express.Router();
 const path = require('path')
@@ -9,24 +10,22 @@ const users = require("../app/controllers/users.controller.js")
 
 //routes
 //handling get requests from client
-router.get('/api/getalltasks/:uid', function(req, res) {
+router.get('/api/getalltasks/:uid/:completed', function(req, res) {
     tasks.findAll(req, res);
 });
 
-//getting all tasks data
-router.get('/api/gettask/:uid/:id', function(req, res) {
-    tasks.findOne(req, res);
-})
+// //getting all tasks data
+// router.get('/api/gettask/:uid/:id', function(req, res) {
+//     tasks.findOne(req, res);
+// })
 
-<<<<<<< HEAD
 //getting track report data
-=======
->>>>>>> 79056552adeb9e14b4f83f01a1b9d0c91a103347
 router.get('/api/view-track-report/:uid/:start_date/:end_date', function(req, res) {
     users.getTrackReport(req, res);
 })
 
 //handling post request from client
+//createing new users
 router.post('/api/add-user', function(req, res) {
     users.create(req, res);
 })
