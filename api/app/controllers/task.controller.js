@@ -1,8 +1,5 @@
-const { Sequelize, sequelize } = require("../models");
 const db = require("../models");
 const Task = db.task;
-//for using operators
-//const Op = db.sequelize.Op;
 
 //Create and save new Task
 exports.create = (req, res) => {
@@ -34,7 +31,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrive all Tasks from the database.
+// Retrive all tasks from the database based on condition provided
 exports.findAll = (req, res) => {
     Task.findAll({
         where: {
@@ -52,25 +49,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// // Find a single Task with id
-// exports.findOne = (req, res) => {
-//     Task.findOne({
-//         where: {
-//             user_id: req.params.uid,
-//             id: req.params.id
-//         }
-//     })
-//     .then(function(data) {
-//         res.send(data);
-//     })
-//     .catch(function(err) {
-//         res.status(500).send({
-//             message: err.message || "Some error has occured while retriving task"
-//         });
-//     });
-// };
-
-//Update a Task by the email in the request
+//Update a task
 exports.update = (req, res) => {
     Task.update(req.body, {
         where: {
@@ -95,7 +74,7 @@ exports.update = (req, res) => {
     });
 };
 
-//Delete a Task with the specified email in the request
+//Delete a task
 exports.delete = (req, res) => {
     Task.destroy({
         where: {
@@ -120,12 +99,3 @@ exports.delete = (req, res) => {
         });
     });
 };
-
-//Find all completed Tasks
-// exports.findAllCompleted = (req, res) => {
-//     Task.findAll({
-//         where: {
-//             //condition remaining
-//         }
-//     })
-// };

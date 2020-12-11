@@ -1,12 +1,12 @@
+//used for encryption
 const crypto = require('crypto');
+
+//including database related modules to use
 const { sequelize } = require('../models');
 const db = require("../models");
 const User = db.user;
-const Task = db.task
 
-//for using operators
-const Op = db.sequelize.Op;
-
+//checking whether user exists
 exports.find = (req, res) => {
     User.findOne({
         where: {
@@ -74,6 +74,7 @@ exports.create = (req, res) => {
     });
 };
 
+
 // Find a single User with and email_id and then authenticate
 exports.authenticate = (req, res) => {
     User.findOne({
@@ -130,7 +131,8 @@ exports.update = (req, res) => {
     });
 };
 
-//Tracker Report
+
+//tracker report data
 exports.getTrackReport = (req, res) => {
     user_id = req.params.uid;
     start_date = req.params.start_date;
@@ -172,29 +174,32 @@ exports.getTrackReport = (req, res) => {
         
 }
 
-//Delete a User with the specified email_id in the request
-// exports.delete = (req, res) => {
-//     const id = req.params.id;
+/*
+//Feature not implemented
+Delete a User with the specified email_id in the request
+exports.delete = (req, res) => {
+    const id = req.params.id;
     
-//     User.destroy({
-//         where: {
-//             id: id
-//         }
-//     })
-//     .then(function(num) {
-//         if(num === 1) {
-//             res.send({
-//                 message: "User was deleted successfuly!"
-//             });
-//         } else {
-//             res.send({
-//                 message: `Cannot update User with id=${id}. Maybe user dosen't exist!`
-//             });
-//         }
-//     })
-//     .catch(function(err) {
-//         res.status(500).send({
-//             message: "Could not delete the user with id=" + id
-//         });
-//     });
-// };
+    User.destroy({
+        where: {
+            id: id
+        }
+    })
+    .then(function(num) {
+        if(num === 1) {
+            res.send({
+                message: "User was deleted successfuly!"
+            });
+        } else {
+            res.send({
+                message: `Cannot update User with id=${id}. Maybe user dosen't exist!`
+            });
+        }
+    })
+    .catch(function(err) {
+        res.status(500).send({
+            message: "Could not delete the user with id=" + id
+        });
+    });
+};
+*/

@@ -8,7 +8,7 @@ const path = require('path')
 const task = require("../app/controllers/task.controller.js");
 const user = require("../app/controllers/user.controller.js")
 
-//routes
+/* routes */
 //handling get requests from client
 router.get('/api/getalltasks/:uid/:completed', function(req, res) {
     task.findAll(req, res);
@@ -19,7 +19,7 @@ router.get('/api/view-track-report/:uid/:start_date/:end_date', function(req, re
     user.getTrackReport(req, res);
 })
 
-//handling post request from client
+/* handling post request from client */
 //creating new users
 router.post('/api/add-user', function(req, res) {
     user.create(req, res);
@@ -54,5 +54,5 @@ router.use(function(req, res) {
     res.status(404).send({message: "Cannot access the requested page!"});
 });
 
-//elements that can be accessed when this file is imported
+//exporting so elements can be accessed when this file is imported
 module.exports = router;
