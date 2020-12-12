@@ -25,7 +25,7 @@ exports.find = (req, res) => {
         }
     })
     .catch(function(err) {
-        conlole.log(err)
+        console.log(err)
         res.status(500).send({
             message: "Some error occures while retrieving data"
         });
