@@ -8,7 +8,7 @@ mainApp.config(['$routeProvider', function($routeProvider) {
         resolve: {
             check: function($location) {
             if(localStorage.getItem('logged')) {
-                $location.path("/tasks")
+                $location.path("/tasks");
             }
         }},
         templateUrl: "./views/login.html",
@@ -155,7 +155,8 @@ mainApp.controller('signupCtrl', ['$scope', '$http', '$location', function($scop
 }]);
 
 
-//some functions for edit & cancel actions and API calls to add, update and update data
+//some functions for edit & cancel actions and 
+//API calls to add, update and update data
 mainApp.controller('tasksCtrl', ['$scope', '$route', '$http', '$filter', function($scope, $route, $http, $filter) {
     $scope.$parent.activePage = "tasks";
     $scope.task = {};
@@ -166,8 +167,12 @@ mainApp.controller('tasksCtrl', ['$scope', '$route', '$http', '$filter', functio
         $scope.not_edit_mode = true;
         $scope.edit_id = null;
 
-        //common showData function to be called when task list needs to be refreshed and not the whole page.
-        const showData = function(condition=false) {
+        //common showData function to be called 
+        //when task list needs to be refreshed and not the whole page.
+        const showData = function(condition) {
+            if(typeof condition ===  "undefined") {
+                condition = false;
+            }
             $http.get(`/api/getalltasks/${localStorage.getItem('user_id')}/${condition}`).then(
                 function successCallback(response) {
                     $scope.tasks = response.data;
@@ -202,7 +207,8 @@ mainApp.controller('tasksCtrl', ['$scope', '$route', '$http', '$filter', functio
             $scope.selected.last_date = new Date($scope.selected.last_date)
         };
 
-        //common updateTask function for updating task content as well as setting task as completed
+        //common updateTask function for updating task content 
+        //as well as setting task as completed
         const updateTasks = function(task_id, data) {
             $http.put(`/api/task/${localStorage.getItem('user_id')}/${task_id}`, data).then(
                 function successCallback(response) {
@@ -261,9 +267,7 @@ mainApp.controller('trackerCtrl', ['$scope', '$http', '$filter', '$location', fu
         $http.get(`/api/view-track-report/${localStorage.user_id}/${start}/${end}`).then(
             function successCallback(response) {
                 //making proper data set for presentation
-                let all_emails = [null];
-                let total_tasks = [null];
-                let completed_tasks = [null];
+                let all_emails = [null], total_tasks = [null], completed_tasks = [null];
                 $scope.users = response.data;
                 for(let user in $scope.users) {
                     all_emails.push($scope.users[user]['email_id']);
@@ -275,8 +279,7 @@ mainApp.controller('trackerCtrl', ['$scope', '$http', '$filter', '$location', fu
                 completed_tasks.push(null);
 
                 //presented chart's content
-                $scope.data = [total_tasks, completed_tasks]
-                $scope.myJson = {
+                let chart_data = {
                     type: "line",
                     title: {
                         text: "Track Report"
@@ -301,8 +304,8 @@ mainApp.controller('trackerCtrl', ['$scope', '$http', '$filter', '$location', fu
                         }
                     },
                     series: [
-                        { "line-color": "black", "line-width": 3, text: "Total tasks", marker: { size: 9 }},
-                        { "line-color": "green", "line-width": 3, text: "Completed tasks", marker: { size: 5 }}     
+                        { values: total_tasks, "line-color": "black", "line-width": 3, text: "Total tasks", marker: { size: 9 }},
+                        { values: completed_tasks, "line-color": "green", "line-width": 3, text: "Completed tasks", marker: { size: 5 }}     
                     ],
                     plot: {
                         "aspect": "spline",
@@ -314,6 +317,12 @@ mainApp.controller('trackerCtrl', ['$scope', '$http', '$filter', '$location', fu
                         }
                     }
                 };
+                zingchart.render({
+                    id: "myChart",
+                    data: chart_data,
+                    height: '100%',
+                    widht: '100%'
+                })
             },
             function errorCallback(response) {
                 alert(response.data.message);

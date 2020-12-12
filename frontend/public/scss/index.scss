@@ -273,6 +273,14 @@ input {
             }
         }
     }
+    .chart {
+        height: 100%;
+        width: 100%;
+    }
+    #myChart {
+        height: 400px;
+        width: 100%;
+    }
 }
 
 .warning {
