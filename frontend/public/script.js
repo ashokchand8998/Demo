@@ -88,8 +88,7 @@ mainApp.controller('loginCtrl', ['$scope', '$http', '$location', function($scope
                     $scope.invalid_user = !response.data.exists;
                 },
                 function errorCallback(response) {
-                    console.log(response.data)
-                    alert(response.message);
+                    alert(response.data.message);
                 }
             )
         } else {

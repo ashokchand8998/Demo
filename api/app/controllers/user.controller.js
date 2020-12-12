@@ -25,8 +25,9 @@ exports.find = (req, res) => {
         }
     })
     .catch(function(err) {
+        conlole.log(err)
         res.status(500).send({
-            message: err
+            message: "Some error occures while retrieving data"
         });
     })
 }
