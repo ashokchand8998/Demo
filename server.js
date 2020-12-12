@@ -18,7 +18,12 @@ app.use(bodyParser.json());
 //routes
 app.use('/', require('./api/routes/routes.js'));
 
+const db = require("./app/models");
 
+//In development, you may need to drop existing tables and re-sync database. Just use force: true as following code:
+db.sequelize.sync({}).then(function() {
+    console.log("Drop and re-sync db.");
+});
 
 app.listen(port, function() {
     console.log(`server is running on port: ${port}`);
