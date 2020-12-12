@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div id="actions" class="element-content">
-                        <button type="button" class="edit-btn default-btn" ng-click="edit(task)" ng-disabled="{{task.last_date < task.curr_date}}" ng-if="task.id !== selected.id">Edit</button>
+                        <button type="button" class="edit-btn default-btn" ng-click="edit(task)" ng-disabled="{{task.last_date < curr_date}}" ng-if="task.id !== selected.id">Edit</button>
                         <button type="button" class="update-btn" ng-disabled="not_edit_mode || editform.$invalid" ng-click="update()" ng-if="task.id === selected.id">Update</button>
                         <button type="button" class="delete-btn default-btn" ng-click="delete(task)" ng-if="task.id !== selected.id">Delete</button>
                         <button type="button" class="cancel-btn" ng-disabled="not_edit_mode || editform.$invalid" ng-click="cancel()" ng-if="task.id === selected.id">Cancel</button>
