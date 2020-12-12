@@ -8,7 +8,7 @@ let sequelize = null;
 *Sequelize(database_name, user, password, {.....})
 */
 if(process.env.DATABASE_URL) {
-    // the application is running on Heroku ......
+    // for the application is running on Heroku ......
     sequelize = new Sequelize(process.env.DATABASE_URL, {
         dialect: 'postgres',
         protocol: 'postgres',

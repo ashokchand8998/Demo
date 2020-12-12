@@ -162,7 +162,7 @@ mainApp.controller('tasksCtrl', ['$scope', '$route', '$http', '$filter', functio
     $scope.task = {};
     if (localStorage.getItem('logged')) {
         //assigning defaults
-        $scope.task.curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
+        $scope.curr_date = $filter('date')(new Date(), "yyyy-MM-dd");
         $scope.task.last_date = new Date();
         $scope.not_edit_mode = true;
         $scope.edit_id = null;
