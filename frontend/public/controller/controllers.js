@@ -6,6 +6,8 @@ mainApp.controller('mainCtrl', ['$scope', function($scope) {
 //currently only shows button for logout
 mainApp.controller('profileCtrl', ['$scope', '$route', function($scope, $route) {
     $scope.$parent.activePage = "profile";
+
+    $scope.username = localStorage.getItem('user_name');
     $scope.logout = function() {
         localStorage.clear();
         $route.reload();
@@ -42,6 +44,7 @@ mainApp.controller('loginCtrl', ['$scope', '$location', 'sampleService', functio
             function(result) {
                 localStorage.setItem('logged', true);
                 localStorage.setItem('user_id', result.id);
+                localStorage.setItem('user_name', result.email_id);
                 $location.path("/tasks");
             }
         )
@@ -77,9 +80,9 @@ mainApp.controller('signupCtrl', ['$scope', '$location', 'sampleService', functi
             const resultPromise = sampleService.signup($scope.user);
             resultPromise.then(
                 function(result) {
-                    console.log(result)
                     localStorage.setItem('logged', true);
                     localStorage.setItem('user_id', result.id);
+                    localStorage.setItem('user_name', result.email_id);
                     $location.path("/");
                 }
             );
