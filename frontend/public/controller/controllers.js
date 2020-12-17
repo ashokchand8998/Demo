@@ -211,62 +211,66 @@ mainApp.controller('trackerCtrl', ['$scope', '$filter', '$location', 'sampleServ
         resultPromise.then(
             function (result) {
                 //making proper data set for presentation
-                let all_emails = [null], total_tasks = [null], completed_tasks = [null];
-                $scope.users = result;
-                for(let user in $scope.users) {
-                    all_emails.push($scope.users[user]['email_id']);
-                    total_tasks.push(parseInt($scope.users[user]['total_tasks']));
-                    completed_tasks.push(parseInt($scope.users[user]['completed_tasks']));
-                }
-                all_emails.push(null);
-                total_tasks.push(null);
-                completed_tasks.push(null);
-
-                //presented chart's content
-                let chart_data = {
-                    type: "line",
-                    title: {
-                        text: "Track Report"
-                    },
-                    "crosshair-x": {},
-                    legend:{
-                        align: "right",
-                        verticalAlign: "top",
-                        adjustLayout: true
-                    },
-                    "scale-x": {
-                        values: all_emails,
-                        label: {
-                            text: "Users"
-                        }
-                    },
-                    "scale-y": {
-                        values: `0: ${Math.max(...total_tasks) + 1}: 1`,
-                        format: "%v",
-                        label: {
-                            text: "No. of tasks"
-                        }
-                    },
-                    series: [
-                        { values: total_tasks, "line-color": "black", "line-width": 3, text: "Total tasks", marker: { size: 9 }},
-                        { values: completed_tasks, "line-color": "green", "line-width": 3, text: "Completed tasks", marker: { size: 5 }}     
-                    ],
-                    plot: {
-                        "aspect": "spline",
-                        "tooltip": false,
-                        "animation": {
-                            effect: 1,
-                            sequence: 2,
-                            speed: 10
-                        }
+                if(result) {
+                    let all_emails = [null], total_tasks = [null], completed_tasks = [null];
+                    $scope.users = result;
+                    for(let user in $scope.users) {
+                        all_emails.push($scope.users[user]['email_id']);
+                        total_tasks.push(parseInt($scope.users[user]['total_tasks']));
+                        completed_tasks.push(parseInt($scope.users[user]['completed_tasks']));
                     }
-                };
-                zingchart.render({
-                    id: "myChart",
-                    data: chart_data,
-                    height: '100%',
-                    widht: '100%'
-                })
+                    all_emails.push(null);
+                    total_tasks.push(null);
+                    completed_tasks.push(null);
+
+                    //presented chart's content
+                    let chart_data = {
+                        type: "line",
+                        title: {
+                            text: "Track Report"
+                        },
+                        "crosshair-x": {},
+                        legend:{
+                            align: "right",
+                            verticalAlign: "top",
+                            adjustLayout: true
+                        },
+                        "scale-x": {
+                            values: all_emails,
+                            label: {
+                                text: "Users"
+                            }
+                        },
+                        "scale-y": {
+                            values: `0: ${Math.max(...total_tasks) + 1}: 1`,
+                            format: "%v",
+                            label: {
+                                text: "No. of tasks"
+                            }
+                        },
+                        series: [
+                            { values: total_tasks, "line-color": "black", "line-width": 3, text: "Total tasks", marker: { size: 9 }},
+                            { values: completed_tasks, "line-color": "green", "line-width": 3, text: "Completed tasks", marker: { size: 5 }}     
+                        ],
+                        plot: {
+                            "aspect": "spline",
+                            "tooltip": false,
+                            "animation": {
+                                effect: 1,
+                                sequence: 2,
+                                speed: 10
+                            }
+                        }
+                    };
+                    zingchart.render({
+                        id: "myChart",
+                        data: chart_data,
+                        height: '100%',
+                        widht: '100%'
+                    })
+                } else {
+                    $location.path('/');
+                }
             }
         );
     };

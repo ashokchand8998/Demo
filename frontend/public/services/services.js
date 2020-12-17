@@ -89,6 +89,7 @@ angular.module("mainApp")
             },
             function errorCallback(response) {
                 alert(response.data.message)
+                return false
             }
         )
     }
