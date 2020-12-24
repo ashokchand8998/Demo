@@ -8,6 +8,7 @@ mainApp.config(['$routeProvider', function($routeProvider) {
         resolve: {
             check: function($location) {
             if(localStorage.getItem('logged')) {
+                console.log("navigating")
                 $location.path("/tasks");
             }
         }},

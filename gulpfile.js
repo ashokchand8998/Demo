@@ -11,7 +11,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch("frontend/public/sytles/scss/index.scss", gulp.parallel(['sass']));
+    gulp.watch("frontend/public/styles/scss/index.scss", gulp.parallel(['sass']));
 });
 
 gulp.task('default', gulp.parallel(['sass', 'watch']));
