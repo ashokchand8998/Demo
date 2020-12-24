@@ -16,28 +16,37 @@ button {
     cursor: pointer;
 }
 header {
+    background-color:grey;
+    color: white;
+    padding: 10px 20px 0px 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    text-align: center;
+    align-items: baseline;
     .title {
-        font-size:45px;
-        font-family: Times New Roman;
+        font-size:40px;
+        font-family: cursive;
         text-align: center;
-        padding-top: 5px;
-        margin: 5px;
-    }
-    .main-nav {
-        display: block;
-        background-color:grey;
-        padding: 0 5px;
+        margin: 0;
+        padding: 0;
     }
     .nav-tabs {
         list-style-type: none;
-        margin:0;
-        padding: 5px 5px;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
         .nav-item {
-            display: inline;;
+            text-align: center;
+            display: inline;
             font-size: large;
             font-weight: bold;
             font-family: cursive;
-            padding: 5px;
+            padding: 7px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             a {
                 color: white;
                 padding: 0 15px;
@@ -265,6 +274,7 @@ input {
         width: 100%;
         display: flex;
         justify-content: center;
+        flex-flow: row wrap;
         .filter-form {
             width: 100%;
             display: flex;
